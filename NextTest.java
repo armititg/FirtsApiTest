@@ -44,7 +44,7 @@ public class NextTest {
         //Response response = get("/people/?search=Luke Skywalker");//.path("people.name");
         // Now let us print the body of the message to see what response
         // we have recieved from the server
-        //String responseBody = response.getBody().asString();
+        String responseBody = response.getBody().asString();
 
 
 
