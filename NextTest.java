@@ -1,3 +1,4 @@
+import io.restassured.path.json.JsonPath;
 import org.junit.Test;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -5,6 +6,8 @@ import io.restassured.response.ValidatableResponse;
 import static io.restassured.RestAssured.*;
 import io.restassured.http.Method;
 import io.restassured.specification.RequestSpecification;
+
+import java.nio.charset.Charset;
 //import static io.restassured.RestAssured.when;
 
 //import org.junit.Assert;
@@ -31,11 +34,16 @@ public class NextTest {
 
         // Make a request to the server by specifying the method Type and the method URL.
         // This will return the Response from the server. Store the response in a variable.
-        Response response = given().log().all().when().get("people").then().extract().response();
+        Response response = given().log().all().when().get("films").then().extract().response();
         if(response.statusCode() == 200) {
             String responseBody = response.getBody().asString();
             //request(Method.GET, "/people/?search=Luke Skywalker");
-            System.out.println("Response Body is =>  " + responseBody);
+            //System.out.println("Response Body is =>  " + responseBody);
+            JsonPath JsonPath = new JsonPath(responseBody);
+            String  Charname = JsonPath.getString("count");
+            System.out.println("HIs name is " + Charname);
+
+
         }
 
 
@@ -44,7 +52,7 @@ public class NextTest {
         //Response response = get("/people/?search=Luke Skywalker");//.path("people.name");
         // Now let us print the body of the message to see what response
         // we have recieved from the server
-        String responseBody = response.getBody().asString();
+        //String responseBody = response.getBody().asString();
 
 
 
